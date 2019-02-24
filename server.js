@@ -11,6 +11,12 @@ const port = 3005;
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 
+// app.use('/', (req, res, next) => {
+//     id = Math.ceil(Math.random() * 19);
+//     console.log('proxy id', id)
+//     next();
+// })
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
@@ -22,7 +28,7 @@ app.post('/randomid', (req, res) => {
 
 app.get('/suggestions', (req, res) => {
     axios
-        .get('http://localhost:3004/suggestions', {
+        .get('http://18.216.95.88:3004/suggestions', {
             params: {
                 id: id
             }
@@ -33,7 +39,7 @@ app.get('/suggestions', (req, res) => {
 
 app.get('/abibas/product', (req, res) => {
     axios
-        .get('http://localhost:3002/abibas/product', {
+        .get('http://54.85.179.37:3002/abibas/product', {
             params: {
                 id: id
             }
@@ -42,9 +48,21 @@ app.get('/abibas/product', (req, res) => {
         .catch(err => res.send(err))
 })
 
+app.get('/abibas/color', (req, res) => {
+    let colorId = req.query.id;
+    axios
+        .get('http://54.85.179.37:3002/abibas/product', {
+            params: {
+                id: colorId
+            }
+        })
+        .then(({ data }) => res.send((data)))
+        .catch(err => res.send(err))
+})
+
 app.get('/reviews', (req, res) => {
     axios
-        .get('http://localhost:3003/reviews', {
+        .get('http://18.191.191.154:3003/reviews', {
             params: {
                 id: id
             }
@@ -55,7 +73,7 @@ app.get('/reviews', (req, res) => {
 
 app.get('/reviews/stats', (req, res) => {
     axios
-        .get('http://localhost:3003/reviews/stats', {
+        .get('http://18.191.191.154:3003/reviews/stats', {
             params: {
                 id: id
             }
@@ -63,8 +81,5 @@ app.get('/reviews/stats', (req, res) => {
         .then(({ data }) => res.send(JSON.stringify(data)))
         .catch(err => res.send(err))
 })
-
-
-
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
