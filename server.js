@@ -39,7 +39,7 @@ app.get('/suggestions', (req, res) => {
 
 app.get('/abibas/product', (req, res) => {
     axios
-        .get('http://54.85.179.37:3002/abibas/product', {
+        .get('http://3.86.105.203:3002/abibas/product', {
             params: {
                 id: id
             }
@@ -51,7 +51,7 @@ app.get('/abibas/product', (req, res) => {
 app.get('/abibas/color', (req, res) => {
     let colorId = req.query.id;
     axios
-        .get('http://54.85.179.37:3002/abibas/product', {
+        .get('http://3.86.105.203:3002/abibas/product', {
             params: {
                 id: colorId
             }
