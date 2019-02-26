@@ -38,8 +38,9 @@ app.get('/suggestions', (req, res) => {
 })
 
 app.get('/search/:keyword', (req, res) => {
+    let keyword = req.params.keyword;
     axios
-        .get('http://localhost:3001/search/:keyword')
+        .get(`http://localhost:3001/search/${keyword}`)
         .then(({data}) => res.send(JSON.stringify(data)))
         .catch(err => console.log(err))
 })
