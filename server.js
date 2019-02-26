@@ -37,6 +37,13 @@ app.get('/suggestions', (req, res) => {
         .catch(err => res.send(JSON.stringify(err)))
 })
 
+app.get('/search/:keyword', (req, res) => {
+    axios
+        .get('http://localhost:3001/search/:keyword')
+        .then(({data}) => res.send(JSON.stringify(data)))
+        .catch(err => console.log(err))
+})
+
 app.get('/abibas/product', (req, res) => {
     axios
         .get('http://3.86.105.203:3002/abibas/product', {
